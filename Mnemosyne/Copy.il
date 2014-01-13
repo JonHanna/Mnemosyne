@@ -71,7 +71,7 @@
             ldsfld bool Mnemosyne.Memory::X86Net
             brfalse.s DoHere
             // jmp around, jmp around, get up, get up and get down.
-            jmp void Mnemosyne.Memory::CopyX86Net(void*, void*, uint32)
+            jmp void Mnemosyne.X86Memory::Copy(void*, void*, uint32)
             
             // Simply load up the arguments, and cpblk
         DoHere:
@@ -108,7 +108,7 @@
             brfalse.s DoHere
             // Have now run out of song lyrics about jumping to reference. Well, there’s Bowie, but would people get
             // get the reference in “jmp they say”?
-            jmp void Mnemosyne.Memory::CopyX86Net(void*, void*, uint32)
+            jmp void Mnemosyne.X86Memory::Copy(void*, void*, uint32)
             
         DoHere:
             // Okay, about the only thing that approaches real work in this file. First we’ll push all arguments unto

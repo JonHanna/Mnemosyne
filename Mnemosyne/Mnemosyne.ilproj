@@ -28,6 +28,7 @@
     <Optimize>True</Optimize>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Constructor.il" />
     <Compile Include="Copy.il" />
     <Compile Include="Overloads.il">
       <DependentUpon>Overloads.tt</DependentUpon>
@@ -35,7 +36,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.il" />
     <Compile Include="Set.il" />
-    <Compile Include="X86NetCopy.il" />
+    <Compile Include="X86NetMemory.il" />
     <Compile Include="Zero.il" />
   </ItemGroup>
   <ItemGroup>
@@ -74,7 +75,7 @@
     <PropertyGroup Condition=" '$(AssemblyOriginatorKeyFile)' != '' And $(SignAssembly)">
       <IlAsmCommand>$(IlAsmCommand) /KEY:"$(AssemblyOriginatorKeyFile)" </IlAsmCommand>
     </PropertyGroup>
-    <Exec Command="$(IlAsmCommand) @(Compile-&gt;'&quot;%(FullPath)&quot;', ' ')" Outputs="@(IntermediateAssembly)" />
+    <Exec Command="$(IlAsmCommand) @(Compile->'&quot;%(FullPath)&quot;', ' ')" Outputs="@(IntermediateAssembly)" />
     <CallTarget Targets="$(TargetsTriggeredByCompilation)" Condition="'$(TargetsTriggeredByCompilation)' != ''" />
   </Target>
 </Project>

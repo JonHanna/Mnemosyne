@@ -30,75 +30,31 @@
 
 .namespace Mnemosyne
 {
-    .class public auto ansi abstract sealed beforefieldinit Memory extends [mscorlib]System.Object
+    .class private auto ansi abstract sealed beforefieldinit X86Memory extends [mscorlib]System.Object
     {
-        // Running on x86, on .NET
-        .field private static initonly bool X86Net
-        // We can use msvcrt.dll’s memcpy
         .field private static initonly bool CanUseMemCpy
-        // 7 on 64-bit, 3 on 32-bit
-        .field private static initonly native uint AlignmentMask
     
         .method private hidebysig static pinvokeimpl("msvcrt.dll" cdecl) 
         void* memcpy(void* dest, void* src, native uint count) cil managed preservesig 
         {
         }
 
-        // Static constructor. Calculate alignment mask, detect if we are on x86 (including x86-64 in 32-bit mode) and
-        // if so, whether we can call into msvcrt’s implementation of memcpy
+        // Static constructor. Test whether we can call into msvcrt’s implementation of memcpy
         .method private hidebysig specialname rtspecialname static void .cctor() cil managed 
         {
             .maxstack 3
-            .locals(native int testDest, native int testSource, string processor)
+            .locals(int32 testDest, int32 testSource)
 
-            // ∧ing a address with a mask of 3 for 32-bit or 7 for 64-bit, detects misaligned addresses. 
-            sizeof [mscorlib]System.Object
-            dup
-            ldc.i4.1
-            sub
-            stsfld native uint Mnemosyne.Memory::AlignmentMask
-
-            // If we aren’t on 32-bit (size of a referene isn’t 4) we don’t care about the rest of this.
-            ldc.i4.4
-            bne.un.s Done
-
-            // Mono doesn’t have the noted problem with x86
-            ldstr "Mono.Runtime"
-            call class [mscorlib]System.Type [mscorlib]System.Type::GetType(string)
-            brinst.s Done
-        
-            // This only works on Windows, but we only care about Windows. 
-            ldstr "PROCESSOR_ARCHITECTURE"
-            call string [mscorlib]System.Environment::GetEnvironmentVariable(string)
-            stloc.2
-
-            // x86 and x86-64 ("AMD64") are the two cases we care about.
-            ldloc.2
-            ldstr "x86"
-            call bool [mscorlib]System.String::op_Equality(string, string)
-            brtrue.s IsX86Net
-        
-            ldloc.2
-            ldstr "AMD64"
-            call bool [mscorlib]System.String::op_Equality(string, string)
-            brtrue.s IsX86Net
-        
-        Done:
-            ret
-        IsX86Net:
-            // Mark X86Net as true
-            ldc.i4.1
-            stsfld bool Mnemosyne.Memory::X86Net
             .try
             {
                 ldloca.s testDest
                 ldloca.s testSource
                 ldc.i4.4
-                call void* Mnemosyne.Memory::memcpy(void*, void*, native uint)
+                call void* Mnemosyne.X86Memory::memcpy(void*, void*, native uint)
                 pop
                 // If we got here, then we know using memcpy works.
                 ldc.i4.1
-                stsfld bool Mnemosyne.Memory::CanUseMemCpy
+                stsfld bool Mnemosyne.X86Memory::CanUseMemCpy
                 leave.s Done
             }
             catch [mscorlib]System.Object
@@ -108,9 +64,11 @@
                 pop
                 leave.s Done
             }
+            Done:
+                ret
         }
 
-        .method private hidebysig static void CopyX86Net(void* dest, void* source, uint32 length)
+        .method private hidebysig static void Copy(void* dest, void* source, uint32 length)
         {
             .custom instance void [mscorlib]System.Security.SecurityCriticalAttribute::.ctor() = (01 00 00 00)
             .maxstack 3
@@ -121,19 +79,19 @@
             ldc.i4 640
             ble.s DoInternal
             // If we can’t use memcpy, then we don’t try.
-            ldsfld bool Mnemosyne.Memory::CanUseMemCpy
+            ldsfld bool Mnemosyne.X86Memory::CanUseMemCpy
             brfalse.s DoInternal
             // Otherwise use memcpy, and then discard its return value.
             ldarg.0
             ldarg.1
             ldarg.2
-            call void* Mnemosyne.Memory::memcpy(void*, void*, native uint)
+            call void* Mnemosyne.X86Memory::memcpy(void*, void*, native uint)
             pop
             ret
 
         DoInternal:
             // This assembly isn’t verifiable anyway, so we might as well just jmp.
-            jmp void Mnemosyne.Memory::MemCpyInternal(void*, void*, uint32)
+            jmp void Mnemosyne.X86Memory::MemCpyInternal(void*, void*, uint32)
         }
 
         .method private hidebysig static void MemCpyInternal(void* dest, void* source, uint32 length) cil managed 
