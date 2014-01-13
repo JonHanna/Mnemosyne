@@ -21,7 +21,12 @@
 // copy is greater than 640 bytes, below which the cost of P/Invoke outweighs the advantages. Otherwise a highly-unwound
 // loop is used.
 
-.assembly extern mscorlib {}
+.assembly extern mscorlib
+{
+    .publickeytoken = (
+        b7 7a 5c 56 19 34 e0 89
+    )
+}
 
 .namespace Mnemosyne
 {

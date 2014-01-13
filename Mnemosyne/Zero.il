@@ -1,4 +1,4 @@
-// Zero.il
+﻿// Zero.il
 //
 // Author:
 //     Jon Hanna <jon@hackcraft.net>
@@ -13,7 +13,12 @@
 // Unless required by applicable law or agreed to in writing, software distributed under the
 // Licence is distributed on an “AS IS” basis, without warranties or conditions of any kind.
 
-.assembly extern mscorlib {}
+.assembly extern mscorlib
+{
+    .publickeytoken = (
+        b7 7a 5c 56 19 34 e0 89
+    )
+}
 
 .namespace Mnemosyne
 {

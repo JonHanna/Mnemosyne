@@ -17,7 +17,12 @@
 // CopyOverloads.tt, while methods specific to x86 (including x86-64 in 32-bit mode) with the Microsoft framework are in
 // X86NetCopy.il. That file also sets the alignment mask used in this file, as that file contains the constructor.
 
-.assembly extern mscorlib {}
+.assembly extern mscorlib
+{
+    .publickeytoken = (
+        b7 7a 5c 56 19 34 e0 89
+    )
+}
 
 .namespace Mnemosyne
 {
