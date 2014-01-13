@@ -12,6 +12,12 @@ Efficient memory copying, setting and zeroing operations for .NET and Mono.
 > Unless required by applicable law or agreed to in writing, software distributed under the  
 > Licence is distributed on an “AS IS” basis, without warranties or conditions of any kind.
 
+# NuGet Package
+
+Mnemosyne is available as a [NuGet package](https://www.nuget.org/packages/Mnemosyne)
+
+Run `Install-Package Mnemosyne` in the [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console) or search for “Mnemosyne” in your IDE’s package management plug-in.
+
 # Usage
 
 This assembly is unverifiable code, and can only be used if it is given full trust, and only by fully-trusted assemblies, as by its very nature it allows writing to arbitrary addresses in memory.  

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Mnemosyne</id>
+        <version>1.0.0.1</version>
+        <authors>Jon Hanna</authors>
+        <licenseUrl>http://joinup.ec.europa.eu/software/page/eupl/licence-eupl</licenseUrl>
+        <projectUrl>https://bitbucket.org/JonHanna/mnemosyne</projectUrl>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <description>Offers efficient copying, setting and zeroing operations.</description>
+    </metadata>
+    <files>
+        <file src="..\bin\Release\Mnemosyne.dll" target="lib\Mnemosyne.dll" />
+        <file src="..\bin\Release\Mnemosyne.xml" target="lib\Mnemosyne.xml" />
+		<file src="..\..\EUPLv.1.1 - Licence.pdf" target="EUPLv.1.1 - Licence.pdf" />
+    </files>
+</package>
