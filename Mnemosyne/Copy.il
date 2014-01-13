@@ -43,8 +43,8 @@
             ldarg.2
             ldc.i4.0
             blt.s OutOfRange
-            // This assembly isn’t verifiable anyway, so we might as well just jmp, as Van Halen said. Note this type-
-            // puns the signed integer into an unsignd integer of equal value.
+            // This assembly isn’t verifiable anyway, so we might as well jmp, as Van Halen said. Note this type-puns
+			// the signed integer into an unsignd integer of equal value.
             jmp void Mnemosyne.Memory::CopyAligned(void*, void*, uint32)
 
         OutOfRange:
