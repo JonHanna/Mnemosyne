@@ -39,6 +39,15 @@
     <Compile Include="Zero.il" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Mnemosyne.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Mnemosyne.xml</LastGenOutput>
+    </None>
+    <None Include="Mnemosyne.xml">
+      <DependentUpon>Mnemosyne.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Overloads.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Overloads.il</LastGenOutput>
