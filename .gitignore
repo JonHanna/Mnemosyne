@@ -1,0 +1,9 @@
+bin/
+obj/
+bin/*
+obj/*
+*.userprefs
+*.*~
+*.nupkg
+/packages/**/*
+!/packages/repositories.config

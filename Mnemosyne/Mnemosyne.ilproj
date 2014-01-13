@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D80B3419-AE6B-44BB-8494-276E8513DAA2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Mnemosyne</RootNamespace>
+    <UsePartialTypes>false</UsePartialTypes>
+    <AssemblyName>Mnemosyne</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ReleaseVersion>1.0.0.1</ReleaseVersion>
+    <PlatformTarget>x64</PlatformTarget>
+    <Win32Resource>Mnemosyne.res</Win32Resource>
+    <NoWin32Manifest>False</NoWin32Manifest>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyOriginatorKeyFile>hackcraftPublic.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>false</SignAssembly>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>None</DebugType>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <ConsolePause>false</ConsolePause>
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Copy.il" />
+    <Compile Include="Overloads.il">
+      <DependentUpon>Overloads.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.il" />
+    <Compile Include="Set.il" />
+    <Compile Include="X86NetCopy.il" />
+    <Compile Include="Zero.il" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Overloads.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Overloads.il</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+  <Target Name="CreateManifestResourceNames" />
+  <Target Name="CoreCompile" Inputs="$(MSBuildAllProjects);@(Compile);" Outputs="@(IntermediateAssembly);$(NonExistentFile);">
+    <GetFrameworkPath>
+      <Output TaskParameter="Path" PropertyName="FrameworkPath" />
+    </GetFrameworkPath>
+    <PropertyGroup>
+      <IlAsmCommand>"$(FrameworkPath)\ilasm" /NOLOGO /DLL /OUTPUT:"@(IntermediateAssembly)"</IlAsmCommand>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Win32Resource)' != '' ">
+      <IlAsmCommand>$(IlAsmCommand) /RESOURCE:"$(Win32Resource)" </IlAsmCommand>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <IlAsmCommand>$(IlAsmCommand) /DEBUG </IlAsmCommand>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <IlAsmCommand>$(IlAsmCommand) /OPTIMIZE </IlAsmCommand>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(AssemblyOriginatorKeyFile)' != '' And $(SignAssembly)">
+      <IlAsmCommand>$(IlAsmCommand) /KEY:"$(AssemblyOriginatorKeyFile)" </IlAsmCommand>
+    </PropertyGroup>
+    <Exec Command="$(IlAsmCommand) @(Compile-&gt;'&quot;%(FullPath)&quot;', ' ')" Outputs="@(IntermediateAssembly)" />
+    <CallTarget Targets="$(TargetsTriggeredByCompilation)" Condition="'$(TargetsTriggeredByCompilation)' != ''" />
+  </Target>
+</Project>
