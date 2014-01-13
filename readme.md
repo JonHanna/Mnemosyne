@@ -28,7 +28,7 @@ With each of these, the “Aligned” form assumes that the addresses are correc
 6. A Stop Screen (Blue Screen of Death or equivalent).
 7. The computer goes into shut-down.
 
-Generally though, they are safe if the address is of a single value, the start of an array, or any point within an array where the size of each element is at least as large as the word size for the CPU (4 bytes on 32-bit including 64-bit CPUs running 32-bit processes, 8 bytes for 64-bit CPUs).7
+Generally though, they are safe if the address is of a single value, the start of an array, or any point within an array where the size of each element is at least as large as the word size for the CPU (4 bytes on 32-bit including 64-bit CPUs running 32-bit processes, 8 bytes for 64-bit CPUs).
 
 Note that lack of an error on x86 or x86-64 does not prove you are using them safely, as those two processors tolerate mis-aligned access well.
 
