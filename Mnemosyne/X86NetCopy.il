@@ -1,4 +1,4 @@
-// X86NetCopy.il
+﻿// X86NetCopy.il
 //
 // Author:
 //     Jon Hanna <jon@hackcraft.net>
@@ -108,7 +108,6 @@
         .method private hidebysig static void CopyX86Net(void* dest, void* source, uint32 length)
         {
             .custom instance void [mscorlib]System.Security.SecurityCriticalAttribute::.ctor() = (01 00 00 00)
-            .custom instance void [mscorlib]System.CLSCompliantAttribute::.ctor(bool) = (01 00 00 00 00)
             .maxstack 3
             
             // Up to around 640 bytes or so, the implementation in this assembly is fast enough that its being not quite
@@ -132,10 +131,9 @@
             jmp void Mnemosyne.Memory::MemCpyInternal(void*, void*, uint32)
         }
 
-        .method public hidebysig static void MemCpyInternal(void* dest, void* source, uint32 length) cil managed 
+        .method private hidebysig static void MemCpyInternal(void* dest, void* source, uint32 length) cil managed 
         {
             .custom instance void [mscorlib]System.Security.SecurityCriticalAttribute::.ctor() = (01 00 00 00)
-            .custom instance void [mscorlib]System.CLSCompliantAttribute::.ctor(bool) = (01 00 00 00 00)
             .maxstack 4
             .locals init(int32 scratchSpace, void* destCopy, void* sourceCopy)
             
