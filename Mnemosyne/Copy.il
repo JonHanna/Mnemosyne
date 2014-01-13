@@ -1,4 +1,4 @@
-// Copy.il
+﻿// Copy.il
 //
 // Author:
 //     Jon Hanna <jon@hackcraft.net>
@@ -44,7 +44,7 @@
             ldc.i4.0
             blt.s OutOfRange
             // This assembly isn’t verifiable anyway, so we might as well jmp, as Van Halen said. Note this type-puns
-			// the signed integer into an unsignd integer of equal value.
+            // the signed integer into an unsignd integer of equal value.
             jmp void Mnemosyne.Memory::CopyAligned(void*, void*, uint32)
 
         OutOfRange:
@@ -113,7 +113,7 @@
             ldarg.2
             // Now we ∨ the two values. The result is a value that will have the worse alignment of the two addresses.
             // E.g. if one is 4-bytes out of alignmnt and one is 3-bytes out, the result will be 7. Since we only care
-            // about the lower bit, 3 and 7 both count as 1-byte misalignment, which is the answer we’ll get. 
+            // about the lowest set bit, 3 and 7 both count as 1-byte misalignment, which is the answer we’ll get. 
             ldarg.0
             ldarg.1
             or
