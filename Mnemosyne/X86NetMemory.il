@@ -34,7 +34,7 @@
     {
         .field private static initonly bool CanUseMemCpy
     
-        .method private hidebysig static pinvokeimpl("msvcrt.dll" cdecl) 
+        .method private hidebysig static pinvokeimpl("msvcrt.dll" nomangle cdecl) 
         void* memcpy(void* dest, void* src, native uint count) cil managed preservesig 
         {
             .custom instance void [mscorlib]System.Security.SuppressUnmanagedCodeSecurityAttribute::.ctor() = (
