@@ -37,6 +37,8 @@
         .method private hidebysig static pinvokeimpl("msvcrt.dll" cdecl) 
         void* memcpy(void* dest, void* src, native uint count) cil managed preservesig 
         {
+            .custom instance void [mscorlib]System.Security.SuppressUnmanagedCodeSecurityAttribute::.ctor() = (
+                01 00 00 00 ) 
         }
 
         // Static constructor. Test whether we can call into msvcrt’s implementation of memcpy
