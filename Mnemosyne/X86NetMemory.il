@@ -13,8 +13,7 @@
 // Unless required by applicable law or agreed to in writing, software distributed under the
 // Licence is distributed on an “AS IS” basis, without warranties or conditions of any kind.
 
-// This file contains a test for the type of chip we are on. One reason is to set the mask to detect misaligned reads
-// and the other is implementations specific to x86 (including x86-64 in 32-bit mode) with the Microsoft framework.
+// This file contains implementations specific to x86 (including x86-64 in 32-bit mode) with the Microsoft framework.
 // With other processors, and with other frameworks (or at least, with Mono) then using cpblk is the most performant,
 // but in the x86 on MS case, the cpblk implementation is poor. We detect this case, and then we call into the msvcrt
 // implementation of memcpy as long as it’s available (we do a test copy in the static constructor) and the length to
