@@ -36,7 +36,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.il" />
     <Compile Include="Set.il" />
-    <Compile Include="X86NetMemory.il" />
+    <Compile Include="X86NetMemory.il">
+      <DependentUpon>X86NetMemory.t4</DependentUpon>
+    </Compile>
     <Compile Include="Zero.il" />
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +54,10 @@
     <None Include="Overloads.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Overloads.il</LastGenOutput>
+    </None>
+    <None Include="X86NetMemory.t4">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>X86NetMemory.il</LastGenOutput>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
