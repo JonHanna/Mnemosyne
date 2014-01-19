@@ -40,7 +40,7 @@
             // 2. Detecting null is easy, but detecting a too-low pointer caused by an offset from a null pointer is
             // platform-dependent. As such we risk either refusing valid code (we blocked too high) or confusing users
             // by throwing NullReferenceException instead of ArgumentNullException if we block too low. Better to just
-            // documnt that we throw NullReferenceException.
+            // document that we throw NullReferenceException.
             // 3. As well as the possibility of NullReferenceException, and AccessViolationException, there’s the
             // possibility of allowed but incorrect writes that cause strange fandango-on-the-core bugs. Since we can’t
             // protect the user from all possibilities caused by incorrect arguments to dest and source, we don’t make

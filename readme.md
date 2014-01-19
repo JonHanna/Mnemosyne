@@ -24,7 +24,7 @@ This assembly is unverifiable code, and can only be used if it is given full tru
 
 There are a variety of overloads of the static methods `Copy`, `CopyAligned`, `Set`, `SetAligned`, `Zero` and `ZeroAligned`. They differ in whether they represent addresses as `void*`, `IntPtr` or `UIntPtr`, and whether the sizes involved are represented by signed or unsigned integers. Of these only those using `IntPtr` and signed integers are CLS-Compliant, so some overloads may not be available in your language of choice.
 
-With each of these, the “Aligned” form assumes that the addresses are correctly aligned for the type of CPU it is running on. The other forms detect whether or not the addresses are mis-aligned, and by how much, and react appropriately. Consequences of calling the “Aligned” with misaligned addresses include:
+With each of these, the “Aligned” form assumes that the addresses are correctly aligned for the type of CPU it is running on. The other forms detect whether or not the addresses are mis-aligned, and by how much, and react appropriately. Possible consequences of calling the “Aligned” with misaligned addresses include:
 
 1. It makes no difference.
 2. It runs much slower.
