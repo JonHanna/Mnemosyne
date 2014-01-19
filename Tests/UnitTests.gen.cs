@@ -28,16 +28,19 @@ namespace Mnemosyne.Tests
         [Test]
         public void SimpleCopyIntPtr()
         {
-            char[] output = new char[SourceLen];
-            fixed(char* source = Source)
+            for(int len = 0; len != SourceLen; ++len)
             {
-                fixed(char* dest = output)
-                    Memory.CopyAligned((IntPtr)dest, (IntPtr)source, SourceByteLen);
-                Assert.AreEqual(Source, new string(output));
-                output = new char[SourceLen];
-                fixed(char* dest = output)
-                    Memory.Copy((IntPtr)dest, (IntPtr)source, SourceByteLen);
-                Assert.AreEqual(Source, new string(output));
+                char[] output = new char[len];
+                fixed(char* source = Source)
+                {
+                    fixed(char* dest = output)
+                        Memory.CopyAligned((IntPtr)dest, (IntPtr)source, 2 * len);
+                    Assert.AreEqual(Source.Substring(0, len), new string(output));
+                    output = new char[len];
+                    fixed(char* dest = output)
+                        Memory.Copy((IntPtr)dest, (IntPtr)source, 2 * len);
+                    Assert.AreEqual(Source.Substring(0, len), new string(output));
+                }
             }
         }
         [Test]
@@ -60,16 +63,19 @@ namespace Mnemosyne.Tests
         [Test]
         public void SimpleCopyUIntPtr()
         {
-            char[] output = new char[SourceLen];
-            fixed(char* source = Source)
+            for(int len = 0; len != SourceLen; ++len)
             {
-                fixed(char* dest = output)
-                    Memory.CopyAligned((UIntPtr)dest, (UIntPtr)source, SourceByteLen);
-                Assert.AreEqual(Source, new string(output));
-                output = new char[SourceLen];
-                fixed(char* dest = output)
-                    Memory.Copy((UIntPtr)dest, (UIntPtr)source, SourceByteLen);
-                Assert.AreEqual(Source, new string(output));
+                char[] output = new char[len];
+                fixed(char* source = Source)
+                {
+                    fixed(char* dest = output)
+                        Memory.CopyAligned((UIntPtr)dest, (UIntPtr)source, 2 * len);
+                    Assert.AreEqual(Source.Substring(0, len), new string(output));
+                    output = new char[len];
+                    fixed(char* dest = output)
+                        Memory.Copy((UIntPtr)dest, (UIntPtr)source, 2 * len);
+                    Assert.AreEqual(Source.Substring(0, len), new string(output));
+                }
             }
         }
         [Test]
@@ -92,16 +98,19 @@ namespace Mnemosyne.Tests
         [Test]
         public void SimpleCopyVoidPointer()
         {
-            char[] output = new char[SourceLen];
-            fixed(char* source = Source)
+            for(int len = 0; len != SourceLen; ++len)
             {
-                fixed(char* dest = output)
-                    Memory.CopyAligned((void*)dest, (void*)source, SourceByteLen);
-                Assert.AreEqual(Source, new string(output));
-                output = new char[SourceLen];
-                fixed(char* dest = output)
-                    Memory.Copy((void*)dest, (void*)source, SourceByteLen);
-                Assert.AreEqual(Source, new string(output));
+                char[] output = new char[len];
+                fixed(char* source = Source)
+                {
+                    fixed(char* dest = output)
+                        Memory.CopyAligned((void*)dest, (void*)source, 2 * len);
+                    Assert.AreEqual(Source.Substring(0, len), new string(output));
+                    output = new char[len];
+                    fixed(char* dest = output)
+                        Memory.Copy((void*)dest, (void*)source, 2 * len);
+                    Assert.AreEqual(Source.Substring(0, len), new string(output));
+                }
             }
         }
         [Test]

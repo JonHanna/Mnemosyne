@@ -1,4 +1,4 @@
-<#@ template language="C#" #>
+﻿<#@ template language="C#" #>
 <#@ output extension=".gen.cs" #>
 <#
 // UnitTests.tt
@@ -51,16 +51,19 @@ foreach(string type in new[]{"IntPtr", "UIntPtr", "void*"})
         [Test]
         public void SimpleCopy<#=methodLabel#>()
         {
-            char[] output = new char[SourceLen];
-            fixed(char* source = Source)
+            for(int len = 0; len != SourceLen; ++len)
             {
-                fixed(char* dest = output)
-                    Memory.CopyAligned((<#=type#>)dest, (<#=type#>)source, SourceByteLen);
-                Assert.AreEqual(Source, new string(output));
-                output = new char[SourceLen];
-                fixed(char* dest = output)
-                    Memory.Copy((<#=type#>)dest, (<#=type#>)source, SourceByteLen);
-                Assert.AreEqual(Source, new string(output));
+                char[] output = new char[len];
+                fixed(char* source = Source)
+                {
+                    fixed(char* dest = output)
+                        Memory.CopyAligned((<#=type#>)dest, (<#=type#>)source, 2 * len);
+                    Assert.AreEqual(Source.Substring(0, len), new string(output));
+                    output = new char[len];
+                    fixed(char* dest = output)
+                        Memory.Copy((<#=type#>)dest, (<#=type#>)source, 2 * len);
+                    Assert.AreEqual(Source.Substring(0, len), new string(output));
+                }
             }
         }
         [Test]
