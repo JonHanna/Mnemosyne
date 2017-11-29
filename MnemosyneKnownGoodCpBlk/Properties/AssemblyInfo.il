@@ -3,15 +3,9 @@
 // Author:
 //     Jon Hanna <jon@hackcraft.net>
 //
-// © 2014 Jon Hanna
+// © 2014–2017 Jon Hanna
 //
-// Licensed under the EUPL, Version 1.1 only (the “Licence”).
-// You may not use, modify or distribute this work except in compliance with the Licence.
-// You may obtain a copy of the Licence at:
-// <http://joinup.ec.europa.eu/software/page/eupl/licence-eupl>
-// A copy is also distributed with this source code.
-// Unless required by applicable law or agreed to in writing, software distributed under the
-// Licence is distributed on an “AS IS” basis, without warranties or conditions of any kind.
+// Licensed under the MIT license. See the LICENSE file in the repository root for more details.
 
 .assembly extern mscorlib { }
 
@@ -29,9 +23,8 @@
         01 00 07 52 65 6c 65 61 73 65 00 00
     )
     .custom instance void [mscorlib]System.Reflection.AssemblyCopyrightAttribute::.ctor(string) = (
-        01 00 3d c2 a9 20 32 30 31 34 20 4a 6f 6e 20 48 61 6e 6e 61 2e 20 4c 69 63 65 6e 73 65 64 20 75
-        6e 64 65 72 20 74 68 65 20 45 55 50 4c 2c 20 56 65 72 73 69 6f 6e 20 31 2e 31 20 6f 6e 6c 79 2e
-        00 00
+        01 00 39 C2 A9 20 32 30 31 34 E2 80 93 32 30 31 37 20 4A 6F 6E 20 48 61 6E 6E 61 2E 20 4C 69 63
+        65 6E 73 65 64 20 75 6E 64 65 72 20 74 68 65 20 4D 49 54 20 6C 69 63 65 6E 73 65 2E
     )
     .custom instance void [mscorlib]System.Reflection.AssemblyDescriptionAttribute::.ctor(string) = (
         01 00 29 45 66 66 69 63 69 65 6e 74 20 75 6e 76 65 72 69 66 69 61 62 6c 65 20 6d 65 6d 6f 72 79
@@ -59,5 +52,5 @@
         }
     }
     .hash algorithm 0x8004
-    .ver 1:0:0:1
+    .ver 1:1:0:0
 }

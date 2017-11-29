@@ -11,7 +11,7 @@
     <UsePartialTypes>false</UsePartialTypes>
     <AssemblyName>Mnemosyne</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <ReleaseVersion>1.0.0.1</ReleaseVersion>
+    <ReleaseVersion>1.1.0.0</ReleaseVersion>
     <PlatformTarget>x64</PlatformTarget>
     <Win32Resource>Mnemosyne.res</Win32Resource>
     <NoWin32Manifest>False</NoWin32Manifest>

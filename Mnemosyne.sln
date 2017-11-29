@@ -55,7 +55,7 @@ Global
 		$2.inheritsScope = text/plain
 		$2.scope = text/plain
 		$0.StandardHeader = $3
-		$3.Text = @${FileName}\n\nAuthor:\n    ${AuthorName} <${AuthorEmail}>\n\n© ${Year} ${CopyrightHolder}\n\nThis source code is licensed under the EUPL, Version 1.1 only (the “Licence”).\nYou may not use, modify or distribute this work except in compliance with the Licence.\nYou may obtain a copy of the Licence at:\n<http://joinup.ec.europa.eu/software/page/eupl/licence-eupl>\nA copy is also distributed with this source code.\nUnless required by applicable law or agreed to in writing, software distributed under the\nLicence is distributed on an “AS IS” basis, without warranties or conditions of any kind.
+		$3.Text = @${FileName}\n\nAuthor:\n    ${AuthorName} <${AuthorEmail}>\n\n© 2014-${Year} ${CopyrightHolder}\n\nLicensed under the MIT license. See the LICENSE file in the repository root for more details.
 		$3.IncludeInNewFiles = True
 		$0.NameConventionPolicy = $4
 		$4.Rules = $5
