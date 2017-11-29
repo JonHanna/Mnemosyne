@@ -40,7 +40,12 @@
             ldarg.1
             ldc.i4.0
             blt.s OutOfRange
-            jmp void Mnemosyne.Memory::ZeroAligned(void*, uint32)
+
+            ldarg.0
+            ldarg.1
+            tail.
+            call void Mnemosyne.Memory::ZeroAligned(void*, uint32)
+            ret
 
         OutOfRange:
             ldstr "length"
@@ -56,7 +61,11 @@
             ldarg.1
             ldc.i4.0
             blt.s OutOfRange
-            jmp void Mnemosyne.Memory::Zero(void*, uint32)
+            ldarg.0
+            ldarg.1
+            tail.
+            call void Mnemosyne.Memory::Zero(void*, uint32)
+            ret
 
         OutOfRange:
             ldstr "length"

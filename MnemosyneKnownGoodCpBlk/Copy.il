@@ -7,6 +7,10 @@
 //
 // Licensed under the MIT license. See the LICENSE file in the repository root for more details.
 
+// This file contains the main implementations of copying methods. Simple overloads that use type-punning are built from
+// CopyOverloads.tt, while methods specific to x86 (including x86-64 in 32-bit mode) with the Microsoft framework are in
+// X86NetCopy.il. That file also sets the alignment mask used in this file, as that file contains the constructor.
+
 .assembly extern mscorlib
 {
     .publickeytoken = (
@@ -22,7 +26,7 @@
         {
             .custom instance void [mscorlib]System.Security.SecurityCriticalAttribute::.ctor() = (01 00 00 00)
             .custom instance void [mscorlib]System.CLSCompliantAttribute::.ctor(bool) = (01 00 00 00 00)
-            .maxstack 2
+            .maxstack 3
             // If length < 0 we throw an exception. Note that we don’t throw an exception for null pointers. This is for
             // three reasons:
             // 1. The sort of code that would use this library, would be prepared to skip some checks (they can skip
@@ -38,9 +42,13 @@
             ldarg.2
             ldc.i4.0
             blt.s OutOfRange
-            // This assembly isn’t verifiable anyway, so we might as well jmp, as Van Halen said. Note this type-puns
-            // the signed integer into an unsignd integer of equal value.
-            jmp void Mnemosyne.Memory::CopyAligned(void*, void*, uint32)
+
+            ldarg.0
+            ldarg.1
+            ldarg.2
+            tail.
+            call void Mnemosyne.Memory::CopyAligned(void*, void*, uint32)
+            ret
 
         OutOfRange:
             ldstr "length"
@@ -57,6 +65,8 @@
             .custom instance void [mscorlib]System.Security.SecurityCriticalAttribute::.ctor() = (01 00 00 00)
             .custom instance void [mscorlib]System.CLSCompliantAttribute::.ctor(bool) = (01 00 00 00 00)
             .maxstack 3
+
+            // Simply load up the arguments, and cpblk
             ldarg.0
             ldarg.1
             ldarg.2
@@ -68,12 +78,17 @@
         {
             .custom instance void [mscorlib]System.Security.SecurityCriticalAttribute::.ctor() = (01 00 00 00)
             .custom instance void [mscorlib]System.CLSCompliantAttribute::.ctor(bool) = (01 00 00 00 00)
-            .maxstack 2
+            .maxstack 3
             ldarg.2
             ldc.i4.0
             blt.s OutOfRange
-            // Kris Kross will make you...
-            jmp void Mnemosyne.Memory::Copy(void*, void*, uint32)
+
+            ldarg.0
+            ldarg.1
+            ldarg.2
+            tail.
+            call void Mnemosyne.Memory::Copy(void*, void*, uint32)
+            ret
 
         OutOfRange:
             ldstr "length"

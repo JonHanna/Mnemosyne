@@ -72,7 +72,7 @@
                 ret
         }
 
-        .method private hidebysig static void Copy(void* dest, void* source, uint32 length)
+        .method public hidebysig static void Copy(void* dest, void* source, uint32 length)
         {
             .custom instance void [mscorlib]System.Security.SecurityCriticalAttribute::.ctor() = (01 00 00 00)
             .maxstack 3
@@ -94,8 +94,12 @@
             ret
 
         DoInternal:
-            // This assembly isn’t verifiable anyway, so we might as well just jmp.
-            jmp void Mnemosyne.X86Memory::MemCpyInternal(void*, void*, uint32)
+            ldarg.0
+            ldarg.1
+            ldarg.2
+            tail.
+            call void Mnemosyne.X86Memory::MemCpyInternal(void*, void*, uint32)
+            ret
         }
 
         .method private hidebysig static void MemCpyInternal(void* dest, void* source, uint32 length) cil managed 

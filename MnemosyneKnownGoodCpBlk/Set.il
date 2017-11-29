@@ -36,11 +36,15 @@
         {
             .custom instance void [mscorlib]System.Security.SecurityCriticalAttribute::.ctor() = (01 00 00 00)
             .custom instance void [mscorlib]System.CLSCompliantAttribute::.ctor(bool) = (01 00 00 00 00)
-            .maxstack 2
+            .maxstack 3
             ldarg.2
             ldc.i4.0
             blt.s OutOfRange
-            jmp void Mnemosyne.Memory::SetAligned(void*, uint8, uint32)
+            ldarg.0
+            ldarg.1
+            ldarg.2
+            initblk
+            ret
 
         OutOfRange:
             ldstr "length"
@@ -52,11 +56,16 @@
         {
             .custom instance void [mscorlib]System.Security.SecurityCriticalAttribute::.ctor() = (01 00 00 00)
             .custom instance void [mscorlib]System.CLSCompliantAttribute::.ctor(bool) = (01 00 00 00 00)
-            .maxstack 2
+            .maxstack 3
             ldarg.2
             ldc.i4.0
             blt.s OutOfRange
-            jmp void Mnemosyne.Memory::Set(void*, uint8, uint32)
+            ldarg.0
+            ldarg.1
+            ldarg.2
+            tail.
+            call void Mnemosyne.Memory::Set(void*, uint8, uint32)
+            ret
 
         OutOfRange:
             ldstr "length"

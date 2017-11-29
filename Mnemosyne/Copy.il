@@ -26,7 +26,7 @@
         {
             .custom instance void [mscorlib]System.Security.SecurityCriticalAttribute::.ctor() = (01 00 00 00)
             .custom instance void [mscorlib]System.CLSCompliantAttribute::.ctor(bool) = (01 00 00 00 00)
-            .maxstack 2
+            .maxstack 3
             // If length < 0 we throw an exception. Note that we don’t throw an exception for null pointers. This is for
             // three reasons:
             // 1. The sort of code that would use this library, would be prepared to skip some checks (they can skip
@@ -42,9 +42,13 @@
             ldarg.2
             ldc.i4.0
             blt.s OutOfRange
-            // This assembly isn’t verifiable anyway, so we might as well jmp, as Van Halen said. Note this type-puns
-            // the signed integer into an unsignd integer of equal value.
-            jmp void Mnemosyne.Memory::CopyAligned(void*, void*, uint32)
+
+            ldarg.0
+            ldarg.1
+            ldarg.2
+            tail.
+            call void Mnemosyne.Memory::CopyAligned(void*, void*, uint32)
+            ret
 
         OutOfRange:
             ldstr "length"
@@ -60,18 +64,20 @@
         {
             .custom instance void [mscorlib]System.Security.SecurityCriticalAttribute::.ctor() = (01 00 00 00)
             .custom instance void [mscorlib]System.CLSCompliantAttribute::.ctor(bool) = (01 00 00 00 00)
-            .maxstack 3
-            // If we’re on x86 on Microsoft’s framework, use the approach specialised for that case.
-            ldsfld bool Mnemosyne.Memory::X86Net
-            brfalse.s DoHere
-            // jmp around, jmp around, get up, get up and get down.
-            jmp void Mnemosyne.X86Memory::Copy(void*, void*, uint32)
-            
-            // Simply load up the arguments, and cpblk
-        DoHere:
+            .maxstack 4
             ldarg.0
             ldarg.1
             ldarg.2
+            // If we’re on x86 on Microsoft’s framework, use the approach specialised for that case.
+            ldsfld bool Mnemosyne.Memory::X86Net
+            brfalse.s DoHere
+
+            tail.
+            call void Mnemosyne.X86Memory::Copy(void*, void*, uint32)
+            ret
+            
+            // Simply load up the arguments, and cpblk
+        DoHere:
             cpblk
             ret
         }
@@ -80,12 +86,17 @@
         {
             .custom instance void [mscorlib]System.Security.SecurityCriticalAttribute::.ctor() = (01 00 00 00)
             .custom instance void [mscorlib]System.CLSCompliantAttribute::.ctor(bool) = (01 00 00 00 00)
-            .maxstack 2
+            .maxstack 3
             ldarg.2
             ldc.i4.0
             blt.s OutOfRange
-            // Kris Kross will make you...
-            jmp void Mnemosyne.Memory::Copy(void*, void*, uint32)
+
+            ldarg.0
+            ldarg.1
+            ldarg.2
+            tail.
+            call void Mnemosyne.Memory::Copy(void*, void*, uint32)
+            ret
 
         OutOfRange:
             ldstr "length"
@@ -98,18 +109,20 @@
             .custom instance void [mscorlib]System.Security.SecurityCriticalAttribute::.ctor() = (01 00 00 00)
             .custom instance void [mscorlib]System.CLSCompliantAttribute::.ctor(bool) = (01 00 00 00 00)
             .maxstack 5
+            ldarg.0
+            ldarg.1
+            ldarg.2
             ldsfld bool Mnemosyne.Memory::X86Net
             brfalse.s DoHere
-            // Have now run out of song lyrics about jumping to reference. Well, there’s Bowie, but would people get
-            // get the reference in “jmp they say”?
-            jmp void Mnemosyne.X86Memory::Copy(void*, void*, uint32)
+
+            tail.
+            call void Mnemosyne.X86Memory::Copy(void*, void*, uint32)
+            ret
             
         DoHere:
             // Okay, about the only thing that approaches real work in this file. First we’ll push all arguments unto
             // the stack, as all following code paths will be wanting them.
-            ldarg.0
-            ldarg.1
-            ldarg.2
+
             // Now we ∨ the two values. The result is a value that will have the worse alignment of the two addresses.
             // E.g. if one is 4-bytes out of alignmnt and one is 3-bytes out, the result will be 7. Since we only care
             // about the lowest set bit, 3 and 7 both count as 1-byte misalignment, which is the answer we’ll get. 
