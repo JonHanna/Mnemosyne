@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+    <metadata>
+        <id>Mnemosyne</id>
+        <version>1.1.0.2</version>
+        <title>Mnemosyne</title>
+        <authors>Jon Hanna</authors>
+        <owners>Jon Hanna</owners>
+        <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+        <projectUrl>https://github.com/JonHanna/Mnemosyne</projectUrl>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <description>Offers efficient copying, setting and zeroing operations.</description>
+        <copyright>© 2014-2017 Jon Hanna</copyright>
+        <tags>memory copying clearing</tags>
+    </metadata>
+    <files>
+        <file src="..\..\MnemosyneKnownGoodCpBlk\bin\Release\Mnemosyne.dll" target="lib\netstandard2.0\Mnemosyne.dll" />
+        <file src="..\..\MnemosyneKnownGoodCpBlk\bin\Release\Mnemosyne.xml" target="lib\netstandard2.0\Mnemosyne.xml" />
+        <file src="..\bin\Release\Mnemosyne.dll" target="lib\Mnemosyne.dll" />
+        <file src="..\bin\Release\Mnemosyne.xml" target="lib\Mnemosyne.xml" />
+        <file src="..\..\LICENSE" target="LICENSE" />
+    </files>
+</package>

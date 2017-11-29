@@ -52,5 +52,5 @@
         }
     }
     .hash algorithm 0x8004
-    .ver 1:1:0:0
+    .ver 1:1:0:2
 }
