@@ -42,7 +42,9 @@ Those forms taking signed sizes are checked for negative values. Aside from this
 
 Generally these methods wrap uses of `cpblk` or `initblk`. These IL instructions are unverifiable and therefore will not be produced when compiling most .NET languages. They do though give very good performance, and so are appropriate when performance matters, and unverifiable code is not a problem, or you already have it anyway (it is after all meant to help in writing to arbitrary addresses).
 
-However, the Microsoft implementation of `cpblk` on x86 (including 32-bit processes running on x86-64) is relatively poor. Hence if the code is running on .NET (as opposed to Mono) on x86, we behave as follows:
+However, the Microsoft implementation of `cpblk` on x86 (including 32-bit processes running on x86-64) was once relatively poor. Hence for older frameworks, if the code is running on .NET (as opposed to Mono) on x86, we behave as follows:
 
 1. If memcpy is available from msvcrt.dll (this is tested for on start-up) and the amount to copy is more than 640 bytes, that is used.
 2. If memcpy is unavailable, or the amount to copy is less than 640 bytes, then a highly-unwound loop is used to perform the copying. This loop is faster than memcpy below 640 bytes due to the cost of P/Invoke, and faster than the MS x86 implementation of cpblk for all sizes of copies.
+
+Since the issues with memcpy were since resolved, a separate version packaged for netstandard 2.0 skips all of this.
