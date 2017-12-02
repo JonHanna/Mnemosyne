@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>12.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D80B3419-AE6B-44BB-8494-276E8513DAA2}</ProjectGuid>
+    <ProjectGuid>{FDDC00BB-9612-4D01-B167-ED62F0E7D230}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Mnemosyne</RootNamespace>
     <UsePartialTypes>false</UsePartialTypes>
@@ -20,7 +20,7 @@
     <SignAssembly>false</SignAssembly>
     <SynchReleaseVersion>false</SynchReleaseVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup>
     <DebugType>None</DebugType>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>

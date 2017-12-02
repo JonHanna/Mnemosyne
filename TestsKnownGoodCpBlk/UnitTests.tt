@@ -18,11 +18,10 @@
 
 using System;
 using Mnemosyne;
-using NUnit.Framework;
+using Xunit;
 
 namespace Mnemosyne.Tests
 {
-    [TestFixture]
     public unsafe class MnemosyneTests
     {
         private const int SourceLen = 1024;
@@ -35,7 +34,8 @@ foreach(string type in new[]{"IntPtr", "UIntPtr", "void*"})
 {
     string methodLabel = type.Replace("void*", "VoidPointer");
 #>
-        [Test]
+
+        [Fact]
         public void SimpleCopy<#=methodLabel#>()
         {
             for(int len = 0; len != SourceLen; ++len)
@@ -45,30 +45,31 @@ foreach(string type in new[]{"IntPtr", "UIntPtr", "void*"})
                 {
                     fixed(char* dest = output)
                         Memory.CopyAligned((<#=type#>)dest, (<#=type#>)source, 2 * len);
-                    Assert.AreEqual(Source.Substring(0, len), new string(output));
+                    Assert.Equal(Source.Substring(0, len), new string(output));
                     output = new char[len];
                     fixed(char* dest = output)
                         Memory.Copy((<#=type#>)dest, (<#=type#>)source, 2 * len);
-                    Assert.AreEqual(Source.Substring(0, len), new string(output));
+                    Assert.Equal(Source.Substring(0, len), new string(output));
                 }
             }
         }
-        [Test]
+
+        [Fact]
         public void SimpleSet<#=methodLabel#>()
         {
             char[] output = new char[SourceLen];
             fixed(char* dest = output)
                 Memory.SetAligned((<#=type#>)dest, 0x12, SourceByteLen);
-            Assert.AreEqual(ByteRepString, new string(output));
+            Assert.Equal(ByteRepString, new string(output));
             fixed(char* dest = output)
                 Memory.ZeroAligned((<#=type#>)dest, SourceByteLen);
-            Assert.AreEqual(AllNullString, new string(output));
+            Assert.Equal(AllNullString, new string(output));
             fixed(char* dest = output)
                 Memory.Set((<#=type#>)dest, 0x12, SourceByteLen);
-            Assert.AreEqual(ByteRepString, new string(output));
+            Assert.Equal(ByteRepString, new string(output));
             fixed(char* dest = output)
                 Memory.Zero((<#=type#>)dest, SourceByteLen);
-            Assert.AreEqual(AllNullString, new string(output));
+            Assert.Equal(AllNullString, new string(output));
         }
 <#}#>
     }
