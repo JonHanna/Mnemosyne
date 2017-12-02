@@ -1,10 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-# SharpDevelop 4.4
-Project("{12B76EC0-1D7B-4FA7-A7D0-C524288B48A1}") = "Mnemosyne", "Mnemosyne\Mnemosyne.ilproj", "{D80B3419-AE6B-44BB-8494-276E8513DAA2}"
+Project("{B4EC64DC-6D44-11DD-AAB0-C9A155D89593}") = "MnemosyneKnownGoodCpBlk", "MnemosyneKnownGoodCpBlk\MnemosyneKnownGoodCpBlk.ilproj", "{D80B3419-AE6B-44BB-8494-276E8513DAA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{0AFEC763-B9EC-44CB-8BFC-7F358B59F9BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsKnownGoodCpBlk", "TestsKnownGoodCpBlk\TestsKnownGoodCpBlk.csproj", "{0AFEC763-B9EC-44CB-8BFC-7F358B59F9BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
