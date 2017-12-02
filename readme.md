@@ -1,4 +1,4 @@
-# Mnemosyne
+# Mnemosyne [<img src="https://ci.appveyor.com/api/projects/status/nq0aqpcxx2d40ent/branch/master?svg=true&passingText=passing%20%F0%9F%8E%89&pendingText=pending%20%E2%8F%B3&failingText=failing%20%F0%9F%94%A5" align="right">](https://ci.appveyor.com/project/JonHanna/mnemosyne/branch/master)
 
 Efficient memory copying, setting and zeroing operations for .NET and Mono.
 
