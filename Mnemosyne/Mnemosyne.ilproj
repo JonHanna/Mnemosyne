@@ -20,7 +20,7 @@
     <SignAssembly>false</SignAssembly>
     <SynchReleaseVersion>false</SynchReleaseVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup>
     <DebugType>None</DebugType>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
